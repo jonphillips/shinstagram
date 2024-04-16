@@ -7,14 +7,14 @@ defmodule Shinstagram.AI do
   def save_r2(image_url, uuid) do
     image_binary = Req.get!(image_url).body
 
-    file_name = "prediction-#{uuid}.png"
-    bucket = System.get_env("BUCKET_NAME")
+    file_name = "ShinstagramImages/prediction-#{uuid}.png"
+    bucket = System.get_env("AWS_BUCKET_NAME")
 
     %{status_code: 200} =
       ExAws.S3.put_object(bucket, file_name, image_binary)
       |> ExAws.request!()
 
-    {:ok, "#{System.get_env("CLOUDFLARE_PUBLIC_URL")}/#{file_name}"}
+    {:ok, "#{System.get_env("S3_PUBLIC_URL")}/#{file_name}"}
   end
 
   def gen_image({:ok, image_prompt}), do: gen_image(image_prompt)

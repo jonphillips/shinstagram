@@ -1,4 +1,4 @@
-defmodule Shinstagram.Repo.Migrations.CreateLogs do
+defmodule Shinstagram.Repo.Migrations.RecreateLogs do
   use Ecto.Migration
 
   def change do
